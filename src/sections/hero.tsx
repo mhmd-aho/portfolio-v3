@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 export function Hero() {
     const heroContacts =  contacts.filter((contact) => contact.hero)
     return (
-        <section className="h-[calc(100vh-3.5rem)] w-screen grid grid-cols-4 lg:grid-rows-6 grid-rows-8 px-2 lg:px-5 mt-14">
+        <section className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14">
             <h1 className="lg:text-9xl text-6xl font-bold lg:tracking-widest tracking-wide lg:col-span-2 col-span-3 col-start-1 row-start-2">Full-stack</h1>
             <h1 className="lg:text-9xl text-6xl font-bold lg:tracking-widest tracking-wide lg:col-span-2 col-span-3 lg:col-start-3 col-start-2 row-start-3">Developer</h1>
             <Button className="rounded-full group lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 row-start-6 text-xl">
@@ -19,9 +19,11 @@ export function Hero() {
             <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 flex items-center justify-between">
                 {
                     heroContacts.map((contact) => (
-                        <Button key={contact.name} variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
-                        <contact.icon />
-                        {contact.name}
+                        <Button asChild key={contact.name} variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
+                            <a href={contact.link} target="_blank">
+                                <contact.icon />
+                                {contact.name}
+                            </a>
                         </Button>
                     ))
                 }

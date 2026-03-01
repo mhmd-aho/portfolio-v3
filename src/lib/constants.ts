@@ -34,3 +34,6 @@ export const contacts: Contact[] =[
         
 
 ]
+export const frontEnd=['HTML','CSS','JavaScript','TypeScript','Tailwind','Bootstrap','React','Next.js','GSAP','Motion']
+export const tools =['Figma','GitHub','Git','Antigravity','Vite','Postman','Vercel']
+export const backEnd = ['Convex']
