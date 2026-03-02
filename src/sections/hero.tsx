@@ -1,10 +1,21 @@
+import { useTheme } from "@/components/app/theme-provider";
 import { Button } from "@/components/ui/button";
-import { contacts } from "@/lib/constants";
+import { contacts, type Contact } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 
 export function Hero() {
-    const heroContacts =  contacts.filter((contact) => contact.hero)
+    const {theme} = useTheme()
+    const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const handleIcon =(contact:Contact)=>{
+            const useLightIcon = theme === 'dark'|| theme === 'system' && isSystemDark
+            if(typeof contact.icon === 'string' ){
+                return <img src={useLightIcon ? contact.icon : contact.iconLight} alt={contact.name} className="size-5"/>
+            }else{
+                return <contact.icon className="size-5"/>
+            }
+        }
+    const heroContacts =  contacts.filter((contact) => contact.media).slice(0,4)
     return (
         <section className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14">
             <h1 className="lg:text-9xl text-6xl font-bold lg:tracking-widest tracking-wide lg:col-span-2 col-span-3 col-start-1 row-start-2">Full-stack</h1>
@@ -18,14 +29,16 @@ export function Hero() {
             </p>
             <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 flex items-center justify-between">
                 {
-                    heroContacts.map((contact) => (
-                        <Button asChild key={contact.name} variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
-                            <a href={contact.link} target="_blank">
-                                <contact.icon />
-                                {contact.name}
-                            </a>
-                        </Button>
-                    ))
+                    heroContacts.map((contact) => {
+                        return (
+                            <Button asChild key={contact.name} variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
+                                <a href={contact.link} target="_blank">
+                                    {handleIcon(contact)}
+                                    {contact.name}
+                                </a>
+                            </Button>
+                        )
+                    })
                 }
             </div>
         </section>
