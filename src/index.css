@@ -4,7 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 @theme inline {
+    --font-default: 'ui-sans-serif', 'system-ui', 'sans-serif';
+    --font-sans: "Noto Sans", sans-serif;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);

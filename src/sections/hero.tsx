@@ -2,9 +2,53 @@ import { useTheme } from "@/components/app/theme-provider";
 import { Button } from "@/components/ui/button";
 import { contacts, type Contact } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollSmoother} from "gsap/ScrollSmoother";
+import { SplitText } from "gsap/SplitText";
+import { useRef } from "react";
+import { GSDevTools } from "gsap/GSDevTools";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+gsap.registerPlugin(useGSAP, SplitText, GSDevTools, MorphSVGPlugin)
+export function Hero({isLoaded}: {isLoaded: boolean}) {
+    const container = useRef(null)
+    useGSAP(() => {
+       if(!isLoaded) return
+       gsap.delayedCall(0.2, () => {
+           const tl = gsap.timeline()
+           tl.from('.fullStack',{
+               xPercent: -100,
+               ease:'power1.inOut'
+        })
+        tl.from('.developer',{
+            xPercent: 100,
+            ease:'power1.inOut'
+        },'<40%')
+        tl.from('.intro',
+            {
+                scale:0,
+                opacity:0,
+                ease:'power1.in'
+            })
+        tl.from('.bttn',
+            {
+                scale:2,
+                opacity:0,
+                ease:'power1.in'
+            },'<')
+            // const smoother = ScrollSmoother.get()
+    //     const intro = new SplitText(".intro", {
+    //         type: "lines",
+    //     })
+    //    if(smoother)
+    //     smoother.effects(intro.lines, {
+    //         lag: (index)=>(index) * 0.1,
+            
+    //     })
+    //    }
+       })
 
-
-export function Hero() {
+    }, {scope: container, dependencies: [isLoaded]})
     const {theme} = useTheme()
     const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{
@@ -17,14 +61,19 @@ export function Hero() {
         }
     const heroContacts =  contacts.filter((contact) => contact.media).slice(0,4)
     return (
-        <section className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14">
-            <h1 className="lg:text-9xl text-6xl font-bold lg:tracking-widest tracking-wide lg:col-span-2 col-span-3 col-start-1 row-start-2">Full-stack</h1>
-            <h1 className="lg:text-9xl text-6xl font-bold lg:tracking-widest tracking-wide lg:col-span-2 col-span-3 lg:col-start-3 col-start-2 row-start-3">Developer</h1>
-            <Button className="rounded-full group lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 row-start-6 text-xl">
-                Projects
-                <ArrowRight className="w-6 h-6 ml-2 transition-all duration-300 group-hover:translate-x-3" />
-            </Button>
-            <p className="lg:text-2xl text-lg col-start-1 lg:col-span-2 col-span-4 lg:row-start-3 row-start-4 row-span-2 lg:pt-3 lg:leading-relaxed">
+        <section ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14 overflow-hidden">
+            <h1 className="fullStack lg:text-9xl text-6xl font-bold lg:tracking-wider lg:col-span-2 col-span-3 col-start-1 row-start-2">Full-stack</h1>
+            <h1 className="developer lg:text-9xl text-6xl font-bold lg:tracking-wider lg:col-span-2 col-span-3 lg:col-start-3 col-start-2 row-start-3">Developer</h1>
+            <div className="bttn lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 row-start-6 ">
+                <Button asChild className="w-full h-full rounded-full group text-xl">
+                    <a className="w-full h-full flex items-center justify-center" href="#projects">
+                        Projects
+                        <ArrowRight className="w-6 h-6 ml-2 transition-all duration-300 group-hover:translate-x-3" />
+                    </a>
+                </Button>
+
+            </div>
+            <p className="intro lg:text-2xl text-lg col-start-1 lg:col-span-2 col-span-4 lg:row-start-3 row-start-4 row-span-2 lg:pt-3 lg:leading-relaxed">
                 Full-Stack Developer crafting fast, scalable, and visually striking <br/>web applications. I transform complex ideas into seamless digital experiences that perform in the real world.
             </p>
             <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 flex items-center justify-between">
