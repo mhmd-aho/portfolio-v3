@@ -8,18 +8,19 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Loading } from './components/app/loading'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [renderPage,setRenderPage] = useState(true)
-  useEffect(() => {
-     document.fonts.ready.then(() => {
-      setIsLoaded(true)
-     })
-  }, [])
+  const [renderPage,setRenderPage] = useState(false)
+  useEffect(()=>{
+    if(!renderPage){
+      document.body.style.overflow = "hidden"
+    }else{
+      document.body.style.overflow = "auto"
+    }
+  },[renderPage])
   useGSAP(() => {
     if(!renderPage) return
     ScrollSmoother.create({
@@ -30,21 +31,19 @@ function App() {
   }, [renderPage])
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      {!renderPage?
-       <Loading isLoaded={isLoaded} setRenderPage={setRenderPage}/>
-      :
+      {!renderPage && <Loading setRenderPage={setRenderPage}/>}
         <>
           <Header/>
           <div id='smooth-wrapper'>
               <main id='smooth-content'>
-                <Hero isLoaded={renderPage} />
-                <About isLoaded={renderPage} />
-                <Projects />
-                <Contact />
+                <Hero renderPage={renderPage}/>
+                <About renderPage={renderPage}/>
+                <Projects/>
+                <Contact/>
               </main>
           </div>
         </>
-      }
+      
     </ThemeProvider>
   )
 }

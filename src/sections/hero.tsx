@@ -8,50 +8,20 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 gsap.registerPlugin(useGSAP, SplitText, ScrollSmoother)
-export function Hero({isLoaded}: {isLoaded: boolean}) {
+export function Hero({renderPage}: {renderPage: boolean}) {
     const container = useRef(null)
     useGSAP(() => {
-       if(!isLoaded) return
-       gsap.delayedCall(0.2, () => {
-           const tl = gsap.timeline()
-           tl.from('.fullStack',{
-               xPercent: -100,
-               ease:'power1.inOut'
-        })
-        tl.from('.developer',{
-            xPercent: 100,
-            ease:'power1.inOut'
-        },'<40%')
-        tl.from('.intro',
-            {
-                scale:0,
-                opacity:0,
-                ease:'power1.in'
-            })
-        tl.from('.bttn',
-            {
-                scale:2,
-                opacity:0,
-                ease:'power1.in'
-            },'<')
-        tl.from('.contact',{
-            opacity:0,
-            ease:'power1.in',
-            stagger:.2
-        },)
+        if(!renderPage) return
         const smoother = ScrollSmoother.get()
         const intro = new SplitText(".intro", {
             type: "lines",
         })
-       if(smoother){
-        smoother.effects(intro.lines, {
-            lag: (index)=>(index) * 0.1,
-            
-        })
-       }
-       })
-
-    }, {scope: container, dependencies: [isLoaded]})
+        if(smoother){
+            smoother.effects(intro.lines, {
+                lag: (index)=>(index) * 0.1, 
+            })
+        }
+    },{scope: container, dependencies: [renderPage]})
     const {theme} = useTheme()
     const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{
