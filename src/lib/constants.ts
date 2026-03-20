@@ -98,5 +98,29 @@ export const projects = [
         tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
         link:'https://notes-app-dun-eight.vercel.app/',
         repo:'https://github.com/mhmd-aho/notes_app'
+    },
+    {
+        name:'Collaborative Notes App1',
+        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
+        image:notes,
+        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
+        link:'https://notes-app-dun-eight.vercel.app/',
+        repo:'https://github.com/mhmd-aho/notes_app'
+    },
+    {
+        name:'Collaborative Notes App2',
+        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
+        image:notes,
+        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
+        link:'https://notes-app-dun-eight.vercel.app/',
+        repo:'https://github.com/mhmd-aho/notes_app'
+    },
+    {
+        name:'Collaborative Notes App3',
+        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
+        image:notes,
+        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
+        link:'https://notes-app-dun-eight.vercel.app/',
+        repo:'https://github.com/mhmd-aho/notes_app'
     }
 ]

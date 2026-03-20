@@ -4,12 +4,10 @@ import { contacts, type Contact } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollSmoother} from "gsap/ScrollSmoother";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
-import { GSDevTools } from "gsap/GSDevTools";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-gsap.registerPlugin(useGSAP, SplitText, GSDevTools, MorphSVGPlugin)
+gsap.registerPlugin(useGSAP, SplitText, ScrollSmoother)
 export function Hero({isLoaded}: {isLoaded: boolean}) {
     const container = useRef(null)
     useGSAP(() => {
@@ -36,16 +34,21 @@ export function Hero({isLoaded}: {isLoaded: boolean}) {
                 opacity:0,
                 ease:'power1.in'
             },'<')
-            // const smoother = ScrollSmoother.get()
-    //     const intro = new SplitText(".intro", {
-    //         type: "lines",
-    //     })
-    //    if(smoother)
-    //     smoother.effects(intro.lines, {
-    //         lag: (index)=>(index) * 0.1,
+        tl.from('.contact',{
+            opacity:0,
+            ease:'power1.in',
+            stagger:.2
+        },)
+        const smoother = ScrollSmoother.get()
+        const intro = new SplitText(".intro", {
+            type: "lines",
+        })
+       if(smoother){
+        smoother.effects(intro.lines, {
+            lag: (index)=>(index) * 0.1,
             
-    //     })
-    //    }
+        })
+       }
        })
 
     }, {scope: container, dependencies: [isLoaded]})
@@ -61,7 +64,7 @@ export function Hero({isLoaded}: {isLoaded: boolean}) {
         }
     const heroContacts =  contacts.filter((contact) => contact.media).slice(0,4)
     return (
-        <section ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14 overflow-hidden">
+        <section id="hero" ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 mt-14 overflow-hidden">
             <h1 className="fullStack lg:text-9xl text-6xl font-bold lg:tracking-wider lg:col-span-2 col-span-3 col-start-1 row-start-2">Full-stack</h1>
             <h1 className="developer lg:text-9xl text-6xl font-bold lg:tracking-wider lg:col-span-2 col-span-3 lg:col-start-3 col-start-2 row-start-3">Developer</h1>
             <div className="bttn lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 row-start-6 ">
@@ -80,12 +83,14 @@ export function Hero({isLoaded}: {isLoaded: boolean}) {
                 {
                     heroContacts.map((contact) => {
                         return (
-                            <Button asChild key={contact.name} variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
-                                <a href={contact.link} target="_blank">
-                                    {handleIcon(contact)}
-                                    {contact.name}
-                                </a>
-                            </Button>
+                            <div key={contact.name} className="contact">
+                                <Button asChild variant='outline' className="rounded-full lg:w-32 w-24 max-lg:gap-1">
+                                    <a href={contact.link} target="_blank">
+                                        {handleIcon(contact)}
+                                        {contact.name}
+                                    </a>
+                                </Button>
+                            </div>
                         )
                     })
                 }
