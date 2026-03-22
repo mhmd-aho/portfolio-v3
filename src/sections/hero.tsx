@@ -8,10 +8,10 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 gsap.registerPlugin(useGSAP, SplitText, ScrollSmoother)
-export function Hero({renderPage}: {renderPage: boolean}) {
+export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}) {
     const container = useRef(null)
     useGSAP(() => {
-        if(!renderPage) return
+        if(!renderPage || !isSoomtherReady) return
         const smoother = ScrollSmoother.get()
         const intro = new SplitText(".intro", {
             type: "lines",
@@ -21,7 +21,7 @@ export function Hero({renderPage}: {renderPage: boolean}) {
                 lag: (index)=>(index) * 0.1, 
             })
         }
-    },{scope: container, dependencies: [renderPage]})
+    },{scope: container, dependencies: [renderPage,isSoomtherReady]})
     const {theme} = useTheme()
     const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{

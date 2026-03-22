@@ -14,6 +14,7 @@ import { Loading } from './components/app/loading'
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 function App() {
   const [renderPage,setRenderPage] = useState(false)
+  const [isSoomtherReady,setIsSoomtherReady] = useState(false)
   useEffect(()=>{
     if(!renderPage){
       document.body.style.overflow = "hidden"
@@ -27,7 +28,9 @@ function App() {
       content: '#smooth-content',
       smooth: 1.5,
       effects: true,
+      smoothTouch: 0.1,
     })
+    setIsSoomtherReady(true)
   }, [renderPage])
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
@@ -36,8 +39,8 @@ function App() {
           <Header/>
           <div id='smooth-wrapper'>
               <main id='smooth-content'>
-                <Hero renderPage={renderPage}/>
-                <About renderPage={renderPage}/>
+                <Hero renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
+                <About renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <Projects/>
                 <Contact/>
               </main>

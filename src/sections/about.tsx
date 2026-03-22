@@ -7,10 +7,10 @@ import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 import React from "react";
 gsap.registerPlugin(useGSAP, SplitText)
-export function About({renderPage}: {renderPage: boolean}) {
+export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}) {
     const container = useRef(null)
     useGSAP(() => {
-        if(!renderPage) return
+        if(!renderPage || !isSoomtherReady) return
         gsap.delayedCall(.1, () => {
         const paraSplit = new SplitText(".para", {
             type: "lines",
@@ -94,7 +94,7 @@ export function About({renderPage}: {renderPage: boolean}) {
             }
         })
     }
-)}, {scope: container})
+)}, {scope: container,dependencies: [renderPage,isSoomtherReady]})
     return (
         <section ref={container} id="about" className="min-h-[calc(100vh-4rem)] w-full flex flex-col max-lg:gap-5 lg:px-5 px-3 ">
             <div className="flex max-lg:flex-col lg:items-center lg:justify-between gap-3">

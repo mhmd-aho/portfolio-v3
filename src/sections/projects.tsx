@@ -7,41 +7,26 @@ import { useRef } from "react";
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 export function Projects() {
     const container = useRef(null)
-    const pin = useRef(null)
-    useGSAP(() => {
-        const projects = gsap.utils.toArray('.project')
-        gsap.set('.projectImage',{
-            clipPath: 'polygon(0 0, 0 100%, 0 100%, 0 0)',
-            autoAlpha: 0
-        })
-        gsap.set('.projectInfo',{
-            autoAlpha: 0,
-            y: 0
-        })
-        projects.forEach((project,i)=>{
-            gsap.to(project,{
-                scale: 0.8 + 0.2 * (i / (projects.length - 1)),
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: project,
-                    start: 'top' +  (15 + 35 * i),
-                    end: 'bottom bottom',
-                    endTrigger: pin.current,
-                    scrub: true,
-                    pin: true,
-                    pinSpacing: false,
-                    invalidateOnRefresh: true
-                }
-            })
-        })
-    }, {scope: container})
+    useGSAP(()=>{
+      const slides = gsap.utils.toArray('.project')
+      gsap.to(slides,{
+        xPercent: -100 * (slides.length - 1),
+        ease:'none',
+        scrollTrigger:{
+          trigger:container.current,
+          start:'top top',
+          scrub:1,
+          pin:true,
+        }
+      })
+    },{scope:container})
     return(
-         <section id="projects" ref={container} className="mt-14 w-full flex flex-col gap-5 max-lg:gap-5 lg:px-5 px-3 ">
+         <section id="projects" ref={container} className="mt-14 w-full flex flex-col gap-5 lg:px-5 px-3 ">
             <h2 className="lg:text-6xl text-4xl font-semibold">Projects</h2>
-            <div ref={pin} className="relative h-[90vh] w-full overflow-hidden">
+            <div className="h-[90vh] w-fit flex flex-nowrap">
                 {
                     projects.map((project) => (
-                        <div key={project.name} className='project h-[500px] w-3/4 bg-background flex flex-col items-center lg:justify-between gap-5 lg:p-5 p-2 rounded-(--radius) shadow group border '>
+                        <div key={project.name} className='project h-full w-screen flex flex-col items-center lg:justify-between gap-5 lg:p-5 p-2 group '>
                             <div className="projectImage w-full relative rounded-md overflow-hidden">
                                 <img src={project.image} alt={project.name} className="w-full"/>
                                 <div className="hidden group-hover:flex absolute top-0 left-0 w-full h-full backdrop-blur-2xl justify-center items-center gap-2">
