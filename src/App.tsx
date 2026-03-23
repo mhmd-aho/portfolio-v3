@@ -10,6 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import { useEffect, useState } from 'react'
 import { Loading } from './components/app/loading'
+import { Footer } from './sections/footer'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 function App() {
@@ -37,12 +38,13 @@ function App() {
       {!renderPage && <Loading setRenderPage={setRenderPage}/>}
         <>
           <Header/>
-          <div id='smooth-wrapper'>
-              <main id='smooth-content'>
+          <div id='smooth-wrapper' >
+              <main id='smooth-content' className='h-fit'>
                 <Hero renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <About renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
-                <Projects/>
-                <Contact/>
+                <Projects renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
+                <Contact renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
+                <Footer/>
               </main>
           </div>
         </>

@@ -29,7 +29,13 @@ import type z from "zod";
 import emailjs from '@emailjs/browser';
 import { useTransition } from 'react';
 import { Spinner } from "@/components/ui/spinner";
-export function Contact() {
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+gsap.registerPlugin(useGSAP,ScrollTrigger)
+export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}) {
+    const container = useRef(null)
     const {theme} = useTheme()
     const [isPending,startTransition] = useTransition()
     const genContact = contacts.filter((contact) => !contact.media)
@@ -43,6 +49,33 @@ export function Contact() {
             return <contact.icon className="size-5"/>
         }
     }
+    useGSAP(()=>{
+      if(!renderPage || !isSoomtherReady) return
+      gsap.delayedCall(.1, () => {
+        gsap.from('.contactInfo',{
+            xPercent:-100,
+            opacity:0,
+            ease:'none',
+            scrollTrigger:{
+                trigger:'.contactInfo',
+                start:'+40px bottom',
+                end:'+=200px',
+                scrub:true,
+            }
+        })
+         gsap.from('.contactForm',{
+            xPercent:100,
+            opacity:0,
+            ease:'none',
+            scrollTrigger:{
+                trigger:'.contactInfo',
+                start:'+40px bottom',
+                end:'+=200px',
+                scrub:true,
+            }
+        })
+      })
+    },{scope:container,dependencies:[renderPage,isSoomtherReady]})
     const form = useForm({
         resolver: zodResolver(contactSchema),
         defaultValues: {
@@ -67,13 +100,13 @@ export function Contact() {
         })
     }
     return (
-        <section id="contact" className="min-h-[calc(100vh-4rem)] mt-14 w-full flex flex-col items-center gap-5 max-lg:gap-5 lg:p-5 p-3 ">
+        <section id="contact" ref={container} className="min-h-[calc(100vh-4rem)] w-full flex flex-col items-center gap-5 max-lg:gap-5 lg:p-5 p-3 ">
             <div className="flex flex-col items-center justify-center gap-2 w-3/4">
                 <h2 className="lg:text-6xl text-4xl font-semibold">Get in touch</h2>
                 <p className="lg:text-lg text-sm text-muted-foreground text-center">Have a project in mind? Let's work together to bring your ideas to life.</p>
             </div>
             <div className="flex-1  w-full flex max-lg:flex-col items-start lg:justify-between gap-10">
-                <div className="flex flex-col gap-6 lg:w-2xl w-full">
+                <div className="contactInfo flex flex-col gap-6 lg:w-2xl w-full">
                     <div className="flex flex-col gap-1">
                         <h3 className="lg:text-2xl text-xl font-semibold">Let's Connect</h3>
                         <p className="max-lg:text-sm text-muted-foreground">I’m always open to discussing new opportunities, creative projects, or potential collaborations.</p>
@@ -112,7 +145,7 @@ export function Contact() {
                         </div>
                     </div>
                 </div>
-                <Card className="lg:w-2xl w-full h-fit">
+                <Card className="contactForm lg:w-2xl w-full h-fit">
                     <CardContent>
                         <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
                             <FieldGroup>

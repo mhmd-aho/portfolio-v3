@@ -27,72 +27,32 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                 scrub: true,
             }
         })
-        gsap.from('.frontEndBlock',{
-            opacity:1,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.frontEnd',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
-        gsap.from('.frontEndWord',{
-            y:200,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.frontEnd',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
-         gsap.from('.toolsBlock',{
-            opacity:1,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.tools',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
-        gsap.from('.toolsWord',{
-            y:200,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.tools',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
-         gsap.from('.backEndBlock',{
-            opacity:1,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.backEnd',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
-        gsap.from('.backEndWord',{
-            y:200,
-            stagger: .2,
-            ease:'none',
-            scrollTrigger: {
-                trigger: '.backEnd',
-                start: "+30px bottom",
-                end: "+=200px",
-                scrub: true,
-            }
-        })
+        const skills = gsap.utils.toArray('.skill')
+       skills.forEach((skill)=>{
+           gsap.from((skill as HTMLElement).querySelectorAll('.skillBlock'),{
+               opacity:1,
+               stagger: .2,
+               ease:'none',
+               scrollTrigger: {
+                   trigger: skill as HTMLElement,
+                   start: "+30px bottom",
+                   end: "+=200px",
+                   scrub: true,
+               }
+           })
+           gsap.from((skill as HTMLElement).querySelectorAll('.skillWord'),{
+               yPercent:100,
+               stagger: .2,
+               ease:'none',
+               scrollTrigger: {
+                   trigger: skill as HTMLElement,
+                   start: "+30px bottom",
+                   end: "+=200px",
+                   scrub: true,
+               }
+           })
+        
+       })
     }
 )}, {scope: container,dependencies: [renderPage,isSoomtherReady]})
     return (
@@ -103,7 +63,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
             </div>
             <div className="flex-1 flex max-lg:flex-col-reverse max-lg:gap-3 items-center justify-between">
                 <div className="h-full flex flex-col justify-center gap-5 lg:w-1/2 w-full">
-                    <Item variant='outline' className="w-full frontEnd">
+                    <Item variant='outline' className="w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl">Front-end</ItemTitle>
                         </ItemHeader>
@@ -114,8 +74,8 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                                 return (
                                     <React.Fragment key={`${item}-${i}`}>
                                         <div className="flex items-center gap-1 overflow-hidden relative">
-                                            <div className="frontEndBlock w-full h-full bg-accent absolute top-0 left-0 rounded-lg opacity-0"/>
-                                            <p className="frontEndWord"> {item} </p>
+                                            <div className="skillBlock w-full h-full bg-accent absolute top-0 left-0 rounded-lg opacity-0"/>
+                                            <p className="skillWord"> {item} </p>
                                         </div>
                                         {i < frontEnd.length - 1 && <p>/</p>}
                                     </React.Fragment>
@@ -125,7 +85,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                            </div>
                         </ItemContent>
                     </Item>
-                    <Item variant='muted' className="lg:w-1/2 w-full tools">
+                    <Item variant='muted' className="lg:w-1/2 w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl">Tools</ItemTitle>
                         </ItemHeader>
@@ -136,8 +96,8 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                                 return (
                                     <React.Fragment key={`${item}-${i}`}>
                                         <div className="flex items-center gap-1 overflow-hidden relative">
-                                            <div className="toolsBlock w-full h-full bg-background absolute top-0 left-0 rounded-lg opacity-0"/>
-                                            <p className="toolsWord"> {item} </p>
+                                            <div className="skillBlock w-full h-full bg-background absolute top-0 left-0 rounded-lg opacity-0"/>
+                                            <p className="skillWord"> {item} </p>
                                         </div>
                                         {i < tools.length - 1 && <p>/</p>}
                                     </React.Fragment>
@@ -147,7 +107,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                            </div>
                         </ItemContent>
                     </Item>
-                    <Item variant='outline' className="w-full backEnd">
+                    <Item variant='outline' className="w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl">Back-end</ItemTitle>
                         </ItemHeader>
@@ -158,8 +118,8 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                                 return (
                                     <React.Fragment key={`${item}-${i}`}>
                                         <div className="flex items-center gap-1 overflow-hidden relative">
-                                            <div className="backEndBlock w-full h-full bg-accent absolute top-0 left-0 rounded-lg opacity-0"/>
-                                            <p className="backEndWord"> {item} </p>
+                                            <div className="skillBlock w-full h-full bg-accent absolute top-0 left-0 rounded-lg opacity-0"/>
+                                            <p className="skillWord"> {item} </p>
                                         </div>
                                         {i < backEnd.length - 1 && <p>/</p>}
                                     </React.Fragment>
@@ -171,8 +131,8 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                     </Item>
                 </div>
                 <div/>
-                <div className="w-96 h-96 overflow-hidden relative">
-                    <img src={pic} alt='my pic' className="absolute h-[150%]" data-speed="auto" />
+                <div className="lg:w-96 w-full h-96 overflow-hidden relative">
+                    <img src={pic} alt='my pic' className="absolute h-[150%] w-full object-cover" data-speed="auto" />
                 </div>
             </div>
         </section>
