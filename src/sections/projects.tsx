@@ -19,11 +19,11 @@ export function Projects({renderPage,isSoomtherReady}: {renderPage: boolean,isSo
           start:'top top',
           scrub:true,
           pin:true,
-        //   snap:{
-        //     snapTo:1/(slides.length-1),
-        //     delay:0,
-        //     directional:false,            
-        //   }
+          snap:{
+            snapTo:1/(slides.length-1),
+            delay:0,
+            directional:false,            
+          }
         }
       })
     })},{scope:container,dependencies:[renderPage,isSoomtherReady]})
@@ -34,12 +34,12 @@ export function Projects({renderPage,isSoomtherReady}: {renderPage: boolean,isSo
                 {
                     projects.map((project) => (
                         <div key={project.name} className='project h-full w-screen flex max-lg:flex-col items-start lg:justify-between gap-5 lg:p-5 p-2 group '>
-                            <div className="projectInfo flex flex-col lg:gap-2 gap-1">
-                                <div className="flex flex-col lg:gap-1">
+                            <div className="projectInfo flex flex-col lg:gap-4 gap-1">
+                                <div className="flex flex-col lg:gap-2">
                                     <h1 className="lg:text-5xl text-2xl font-semibold">{project.name}</h1>
                                     <p className="lg:text-xl text-lg text-muted-foreground">{project.description}</p>
                                 </div>
-                                <div>
+                                <div className="flex flex-col lg:gap-2">
                                     <h2 className="lg:text-4xl text-xl font-semibold">Tools:</h2>
                                     <p className="lg:text-lg text-sm">{project.tools.join(' / ')}</p>
                                 </div>
