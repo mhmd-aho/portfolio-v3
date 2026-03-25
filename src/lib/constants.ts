@@ -1,6 +1,6 @@
 import { Github, Linkedin, Instagram, Phone, Mail,MapPinned,type LucideIcon } from 'lucide-react'
-import ecommerce from '@/assets/e-co.png'
-import notes from '@/assets/notes-app.png'
+import ecommerce from '@/assets/e-commerce-2-desktop.png'
+import notes from '@/assets/notes-app-desktop.png'
 import XBlack from '@/assets/X-black.png' 
 import XWhite from '@/assets/X-white.png' 
 import upworkBlack from '@/assets/upwork-black.svg'
@@ -82,7 +82,7 @@ export const contacts: Contact[] =[
 export const frontEnd=['HTML','CSS','JavaScript','TypeScript','Tailwind','Bootstrap','React','Next.js','GSAP','Motion']
 export const tools =['Figma','GitHub','Git','Antigravity','Vite','Postman','Vercel']
 export const backEnd = ['Python','Django','Convex']
-export const projects = [
+export const projects:Project[] = [
     {
         name:'E-commerce',
         description:'A high-performance, real-time e-commerce features a seamless shopping experience for browsing, filtering, and purchasing footwear.',
@@ -99,28 +99,5 @@ export const projects = [
         link:'https://notes-app-dun-eight.vercel.app/',
         repo:'https://github.com/mhmd-aho/notes_app'
     },
-    {
-        name:'Collaborative Notes App1',
-        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
-        image:notes,
-        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
-        link:'https://notes-app-dun-eight.vercel.app/',
-        repo:'https://github.com/mhmd-aho/notes_app'
-    },
-    {
-        name:'Collaborative Notes App2',
-        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
-        image:notes,
-        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
-        link:'https://notes-app-dun-eight.vercel.app/',
-        repo:'https://github.com/mhmd-aho/notes_app'
-    },
-    {
-        name:'Collaborative Notes App3',
-        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
-        image:notes,
-        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
-        link:'https://notes-app-dun-eight.vercel.app/',
-        repo:'https://github.com/mhmd-aho/notes_app'
-    }
+
 ]
