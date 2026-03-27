@@ -68,7 +68,7 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
             opacity:0,
             ease:'none',
             scrollTrigger:{
-                trigger:'.contactInfo',
+                trigger:'.contactForm',
                 start:'+40px bottom',
                 end:'+=200px',
                 scrub:true,
