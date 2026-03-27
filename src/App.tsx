@@ -42,7 +42,7 @@ function App() {
               <main id='smooth-content' className='h-fit'>
                 <Hero renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <About renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
-                <Projects renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
+                <Projects/>
                 <Contact renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <Footer/>
               </main>
