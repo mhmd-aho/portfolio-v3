@@ -3,6 +3,9 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import type { Project } from "@/lib/constants";
 import { Button } from "../ui/button";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export function ProjectCard({project}: {project: Project}){
     const container = useRef<HTMLDivElement>(null)
@@ -20,6 +23,27 @@ export function ProjectCard({project}: {project: Project}){
             duration: 0.4,
             ease: 'power3.out'
         });
+        const media = gsap.matchMedia()
+        media.add("(max-width: 1024px)", () => {
+            gsap.set('.img', { yPercent: -100 });
+            const tween = gsap.to('.img', {
+                yPercent: 0,
+                duration: 0.4,
+                ease: 'none'
+            });
+
+            ScrollTrigger.create({
+                trigger: container.current,
+                start: 'top center',
+                end: '+=210px',
+                scrub: 1,
+                animation: tween,
+                onEnter: () => gsap.set('.img', { opacity: 1 }),
+                onLeave: () => gsap.set('.img', { opacity: 0 }),
+                onEnterBack: () => gsap.set('.img', { opacity: 1 }),
+                onLeaveBack: () => gsap.set('.img', { opacity: 0 })
+            });
+        })
     }, {scope: container, dependencies:[project]})
 
     const handleMouseMove = (e:React.MouseEvent)=>{
@@ -46,7 +70,7 @@ export function ProjectCard({project}: {project: Project}){
             onMouseLeave={handleMouseLeave} 
             key={project.name} 
             className="h-52 flex flex-col justify-center lg:gap-3 gap-1 border-b border-muted relative group">
-            <div className="img w-96 rounded absolute pointer-events-none right-10 top-1/2 -translate-y-1/2 z-10 overflow-hidden shadow-xl">
+            <div className="img lg:w-96 w-40 rounded absolute pointer-events-none right-10 top-1/2 -translate-y-1/2 lg:z-10 z-50 overflow-hidden shadow-xl">
                 <img src={project.image} alt={project.name} className="pointer-events-none w-full h-full object-cover" />
             </div>
             

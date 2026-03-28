@@ -6,12 +6,22 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Title } from "@/components/app/title";
 gsap.registerPlugin(useGSAP, SplitText, ScrollSmoother)
 export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}) {
     const container = useRef(null)
     const {theme} = useTheme()
+    const [isMobile,setIsMobile] = useState(window.innerWidth < 768)
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
     const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{
             const useLightIcon = theme === 'dark'|| theme === 'system' && isSystemDark
@@ -44,15 +54,15 @@ export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomth
             <p className="intro lg:text-2xl text-lg col-start-1 lg:col-span-2 col-span-4 row-start-3 row-span-2 lg:pt-3 lg:leading-relaxed">
                 Full-Stack Developer crafting fast, scalable, and visually striking <br/>web applications. I transform complex ideas into seamless digital experiences that perform in the real world.
             </p>
-            <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 max-lg:row-span-2 flex items-center justify-between max-lg:flex-wrap max-lg:justify-center max-lg:gap-1">
+            <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 flex items-center justify-between max-lg:justify-around">
                 {
                     heroContacts.map((contact) => {
                         return (
                             <div key={contact.name}>
-                                <Button asChild variant='outline' className="rounded-full w-32 max-lg:gap-1">
+                                <Button asChild variant='outline' size={isMobile ? 'icon' : 'default'} className="rounded-full w-32 max-lg:size-10 max-lg:gap-1">
                                     <a href={contact.link} target="_blank">
                                         {handleIcon(contact)}
-                                        {contact.name}
+                                        <span className="max-lg:hidden">{contact.name}</span>
                                     </a>
                                 </Button>
                             </div>

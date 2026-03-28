@@ -12,18 +12,18 @@ export function Title({children,position,renderPage,isSoomtherReady}: {children:
             const title = gsap.utils.toArray('.title')
             title.forEach((items,index)=>{
                 smoother.effects(items as HTMLElement, {
-                    lag: index / 10
+                    lag: index / 10,
                 })
             }) 
         }
     },{scope: container, dependencies: [renderPage,isSoomtherReady]})
     return (
         <div ref={container} className={`relative ${position}`}>
-                <h1 className="title lg:text-9xl text-4xl font-bold lg:tracking-wider absolute inset-0 z-50 ">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_pink] [-webkit-text-stroke:1px_pink] font-bold lg:tracking-wider absolute inset-0 z-40">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_yellow] [-webkit-text-stroke:1px_yellow] font-bold lg:tracking-wider absolute inset-0 z-30">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_blue] [-webkit-text-stroke:1px_blue] font-bold lg:tracking-wider absolute inset-0 z-20">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_black] dark:[text-stroke:1px_white] [-webkit-text-stroke:1px_black] dark:[-webkit-text-stroke:1px_white] font-bold lg:tracking-wider absolute inset-0 z-10">{children}</h1>
+                <h1 className="title lg:text-9xl text-4xl font-bold lg:tracking-wider absolute inset-0 z-40 ">{children}</h1>
+                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#1b4332] [-webkit-text-stroke:1px_#1b4332] font-bold lg:tracking-wider absolute inset-0 z-30">{children}</h1>
+                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#2d6a4f] [-webkit-text-stroke:1px_#2d6a4f] font-bold lg:tracking-wider absolute inset-0 z-20">{children}</h1>
+                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#40916c] [-webkit-text-stroke:1px_#40916c] font-bold lg:tracking-wider absolute inset-0 z-10">{children}</h1>
+                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#52b788] [-webkit-text-stroke:1px_#52b788] font-bold lg:tracking-wider absolute inset-0 z-0">{children}</h1>
         </div>
     )
 }
