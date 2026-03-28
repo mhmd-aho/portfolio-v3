@@ -18,12 +18,12 @@ export function Title({children,position,renderPage,isSoomtherReady}: {children:
         }
     },{scope: container, dependencies: [renderPage,isSoomtherReady]})
     return (
-        <div ref={container} className={`relative ${position}`}>
-                <h1 className="title lg:text-9xl text-4xl font-bold lg:tracking-wider absolute inset-0 z-40 ">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#1b4332] [-webkit-text-stroke:1px_#1b4332] font-bold lg:tracking-wider absolute inset-0 z-30">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#2d6a4f] [-webkit-text-stroke:1px_#2d6a4f] font-bold lg:tracking-wider absolute inset-0 z-20">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#40916c] [-webkit-text-stroke:1px_#40916c] font-bold lg:tracking-wider absolute inset-0 z-10">{children}</h1>
-                <h1 className="title lg:text-9xl text-4xl text-transparent [text-stroke:1px_#52b788] [-webkit-text-stroke:1px_#52b788] font-bold lg:tracking-wider absolute inset-0 z-0">{children}</h1>
+        <div ref={container} className={`relative w-full h-full ${position}`}>
+                <h1 className="title xl:text-9xl lg:text-7xl md:text-6xl text-3xl font-bold lg:tracking-wider absolute inset-0 z-40 ">{children}</h1>
+                <h1 className="title xl:text-9xl lg:text-7xl md:text-6xl text-3xl text-transparent [text-stroke:1px_#1b4332] [-webkit-text-stroke:1px_#1b4332] font-bold lg:tracking-wider absolute inset-0 z-30">{children}</h1>
+                <h1 className="title xl:text-9xl lg:text-7xl md:text-6xl text-3xl text-transparent [text-stroke:1px_#2d6a4f] [-webkit-text-stroke:1px_#2d6a4f] font-bold lg:tracking-wider absolute inset-0 z-20">{children}</h1>
+                <h1 className="title xl:text-9xl lg:text-7xl md:text-6xl text-3xl text-transparent [text-stroke:1px_#40916c] [-webkit-text-stroke:1px_#40916c] font-bold lg:tracking-wider absolute inset-0 z-10">{children}</h1>
+                <h1 className="title xl:text-9xl lg:text-7xl md:text-6xl text-3xl text-transparent [text-stroke:1px_#52b788] [-webkit-text-stroke:1px_#52b788] font-bold lg:tracking-wider absolute inset-0 z-0">{children}</h1>
         </div>
     )
 }

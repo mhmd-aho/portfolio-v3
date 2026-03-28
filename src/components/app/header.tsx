@@ -3,6 +3,7 @@ import { Menu } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { useGSAP } from "@gsap/react";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { Button } from "../ui/button";
 export function Header() {
     const {contextSafe} = useGSAP()
     const handleNavClick = contextSafe((e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
@@ -13,8 +14,8 @@ export function Header() {
         }
     })
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-2 lg:px-5 h-14 backdrop-blur-lg">
-            <h1 onClick={(e) => handleNavClick(e, '#hero')} className="lg:text-2xl text-lg font-bold lg:w-1/4 cursor-pointer">Mohamad Abou Hamoud</h1>
+        <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-2 lg:px-5 h-14 bg-background/60 backdrop-blur-lg">
+            <h1 onClick={(e)=>handleNavClick(e,'#hero')} className="lg:text-xl text-lg xl:text-2xl xl:w-1/3 font-bold cursor-pointer">Mohamad Abou Hamoud</h1>
             <nav className="hidden lg:flex items-center gap-5">
                 <a className="cursor-pointer" onClick={(e) => handleNavClick(e, '#about')} >About</a>
                 <a className="cursor-pointer" onClick={(e) => handleNavClick(e, '#projects')} >Projects</a>
@@ -24,7 +25,9 @@ export function Header() {
                 <ModeToggle />
                 <DropdownMenu>
                     <DropdownMenuTrigger className="lg:hidden">
-                        <Menu className="size-9" />
+                        <Button variant='outline' size='icon' >
+                            <Menu className="h-[1.2rem] w-[1.2rem]" />
+                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem>

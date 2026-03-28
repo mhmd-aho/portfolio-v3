@@ -33,10 +33,10 @@ export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomth
         }
     const heroContacts =  contacts.filter((contact) => contact.media).slice(0,4)
     return (
-        <section id="hero" ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-6 grid-rows-8 lg:px-5 px-3 pt-14 overflow-hidden">
+        <section id="hero" ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-5 grid-rows-7 lg:px-5 px-3 pt-14 overflow-hidden">
             <Title renderPage={renderPage} isSoomtherReady={isSoomtherReady} position="col-span-2 col-start-1 lg:row-start-2 row-start-1">Full-stack</Title>
             <Title renderPage={renderPage} isSoomtherReady={isSoomtherReady} position="col-span-2 col-start-3 lg:row-start-3 row-start-2">Developer</Title>
-            <div className="bttn lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 row-start-6 ">
+            <div className="bttn lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 md:row-start-5 row-start-6 ">
                 <Button asChild className="w-full h-full rounded-full group text-xl">
                     <a className="w-full h-full flex items-center justify-center" onClick={e=>{
                         e.preventDefault()
@@ -54,15 +54,15 @@ export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomth
             <p className="intro lg:text-2xl text-lg col-start-1 lg:col-span-2 col-span-4 row-start-3 row-span-2 lg:pt-3 lg:leading-relaxed">
                 Full-Stack Developer crafting fast, scalable, and visually striking <br/>web applications. I transform complex ideas into seamless digital experiences that perform in the real world.
             </p>
-            <div className="lg:col-start-2 col-start-1 lg:col-span-2 col-span-4 lg:row-start-5 row-start-7 flex items-center justify-between max-lg:justify-around">
+            <div className="col-start-1  col-span-4 lg:row-start-5 md:row-start-6 row-start-7 flex items-center justify-around">
                 {
                     heroContacts.map((contact) => {
                         return (
                             <div key={contact.name}>
-                                <Button asChild variant='outline' size={isMobile ? 'icon' : 'default'} className="rounded-full w-32 max-lg:size-10 max-lg:gap-1">
+                                <Button asChild variant='outline' size={isMobile ? 'icon' : 'default'} className="rounded-full w-32 max-md:size-10 max-md:gap-1">
                                     <a href={contact.link} target="_blank">
                                         {handleIcon(contact)}
-                                        <span className="max-lg:hidden">{contact.name}</span>
+                                        <span className="max-md:hidden">{contact.name}</span>
                                     </a>
                                 </Button>
                             </div>

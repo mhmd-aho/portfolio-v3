@@ -70,7 +70,7 @@ export function ProjectCard({project}: {project: Project}){
             onMouseLeave={handleMouseLeave} 
             key={project.name} 
             className="h-52 flex flex-col justify-center lg:gap-3 gap-1 border-b border-muted relative group">
-            <div className="img lg:w-96 w-40 rounded absolute pointer-events-none right-10 top-1/2 -translate-y-1/2 lg:z-10 z-50 overflow-hidden shadow-xl">
+            <div className="img lg:w-96 w-52 rounded absolute pointer-events-none right-10 top-1/2 -translate-y-1/2 z-10 overflow-hidden shadow-xl">
                 <img src={project.image} alt={project.name} className="pointer-events-none w-full h-full object-cover" />
             </div>
             
