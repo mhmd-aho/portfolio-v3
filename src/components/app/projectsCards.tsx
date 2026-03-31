@@ -78,9 +78,7 @@ export function ProjectCard({project}: {project: Project}){
             <p className="z-20 lg:text-lg text-sm font-medium text-muted-foreground relative">{project.description}</p>
             
             <div className="flex gap-2 flex-wrap z-20 relative mt-1">
-                {project.tools.map((tool) => (
-                    <span key={tool} className="text-xs bg-muted px-2 py-1 rounded-full">{tool}</span>
-                ))}
+                {project.tools.join(' / ')}
             </div>
             
             <div className="flex gap-2 z-20 relative mt-1">
