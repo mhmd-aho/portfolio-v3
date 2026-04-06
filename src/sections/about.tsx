@@ -16,6 +16,19 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
             type: "lines",
             mask: 'lines'
         })
+        const titleSplit = SplitText.create(".title", {
+            type: "chars",
+        })
+        gsap.from(titleSplit.chars, {
+            yPercent:-100,
+            stagger: .2,
+            ease:'bounce',
+            scrollTrigger: {
+                trigger: '.title',
+                start: "-40px bottom",
+                end: "+=200px",
+            }
+        })
         gsap.from(paraSplit.lines, {
             y:200,
             stagger: .2,
@@ -46,7 +59,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                ease:'none',
                scrollTrigger: {
                    trigger: skill as HTMLElement,
-                   start: "+30px bottom",
+                   start: "top bottom",
                    end: "+=200px",
                    scrub: true,
                }
@@ -56,9 +69,9 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
     }
 )}, {scope: container,dependencies: [renderPage,isSoomtherReady]})
     return (
-        <section ref={container} id="about" className="min-h-[calc(100vh-4rem)] w-full flex flex-col max-lg:gap-5 lg:px-5 px-3 pt-5 ">
+        <section ref={container} id="about" className="min-h-screen w-full flex flex-col max-lg:gap-5 lg:px-5 px-3 pt-5 ">
             <div className="flex max-lg:flex-col lg:items-center lg:justify-between gap-3">
-                <h2 className="lg:text-6xl text-4xl font-semibold">About me</h2>
+                <h2 className="title lg:text-6xl text-4xl font-semibold lg:h-20 h-14 overflow-hidden">About me</h2>
                 <p className="lg:text-2xl text-lg para">Hey i’m Mohamad a <span className="font-semibold">full-stack developer</span><br/> from lebanon</p>
             </div>
             <div className="flex-1 flex max-lg:flex-col-reverse max-lg:gap-3 items-center justify-between">

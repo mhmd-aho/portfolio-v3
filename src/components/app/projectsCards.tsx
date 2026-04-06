@@ -4,10 +4,11 @@ import { useRef } from "react";
 import type { Project } from "@/lib/constants";
 import { Button } from "../ui/button";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger)
+gsap.registerPlugin(useGSAP, ScrollTrigger,ScrollSmoother)
 
-export function ProjectCard({project}: {project: Project}){
+export function ProjectCard({project,renderPage,isSoomtherReady}: {project: Project,renderPage: boolean,isSoomtherReady: boolean}){
     const container = useRef<HTMLDivElement>(null)
     const imgY = useRef<gsap.QuickToFunc | null>(null)
     const imgOpacity = useRef<gsap.QuickToFunc | null>(null)
@@ -25,26 +26,23 @@ export function ProjectCard({project}: {project: Project}){
         });
         const media = gsap.matchMedia()
         media.add("(max-width: 1024px)", () => {
-            gsap.set('.img', { yPercent: -100 });
-            const tween = gsap.to('.img', {
-                yPercent: 0,
-                duration: 0.4,
-                ease: 'none'
-            });
-
+            const smooth = ScrollSmoother.get()
+            if(!smooth) return
+            smooth.effects('.pic', {
+                speed: 'auto',
+            })
             ScrollTrigger.create({
                 trigger: container.current,
                 start: 'top center',
                 end: '+=210px',
                 scrub: 1,
-                animation: tween,
                 onEnter: () => gsap.set('.img', { opacity: 1 }),
                 onLeave: () => gsap.set('.img', { opacity: 0 }),
                 onEnterBack: () => gsap.set('.img', { opacity: 1 }),
                 onLeaveBack: () => gsap.set('.img', { opacity: 0 })
             });
         })
-    }, {scope: container, dependencies:[project]})
+    }, {scope: container, dependencies:[renderPage,isSoomtherReady]})
 
     const handleMouseMove = (e:React.MouseEvent)=>{
         if(!imgY.current || !container.current) return;
@@ -69,9 +67,9 @@ export function ProjectCard({project}: {project: Project}){
             onMouseEnter={handleMouseEnter} 
             onMouseLeave={handleMouseLeave} 
             key={project.name} 
-            className="h-52 flex flex-col justify-center lg:gap-3 gap-1 border-b border-muted relative group">
-            <div className="img lg:w-96 w-52 rounded absolute pointer-events-none right-10 top-1/2 -translate-y-1/2 z-10 overflow-hidden shadow-xl">
-                <img src={project.image} alt={project.name} className="pointer-events-none w-full h-full object-cover" />
+            className="h-52 pl-4 flex flex-col justify-center lg:gap-3 gap-1 border-b border-muted relative group">
+            <div className="img lg:w-96 w-full h-full rounded absolute max-lg:inset-0 lg:right-10 pointer-events-none  overflow-hidden lg:shadow-xl">
+                <img src={project.image} alt={project.name} className="pointer-events-none w-full lg:h-full h-[150%] object-cover pic max-lg:opacity-50" />
             </div>
             
             <h1 className="z-20 lg:text-2xl text-xl font-semibold relative">{project.name}</h1>

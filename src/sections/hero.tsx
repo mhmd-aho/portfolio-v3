@@ -33,7 +33,7 @@ export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomth
         }
     const heroContacts =  contacts.filter((contact) => contact.media).slice(0,4)
     return (
-        <section id="hero" ref={container} className="h-[calc(100vh-3.5rem)] w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-5 grid-rows-7 lg:px-5 px-3 pt-14 overflow-hidden">
+        <section id="hero" ref={container} className="min-h-screen w-full overflow-x-hidden grid grid-cols-4 lg:grid-rows-5 grid-rows-7 lg:px-5 px-3 pt-16 overflow-hidden">
             <Title renderPage={renderPage} isSoomtherReady={isSoomtherReady} position="col-span-2 col-start-1 lg:row-start-2 row-start-1">Full-stack</Title>
             <Title renderPage={renderPage} isSoomtherReady={isSoomtherReady} position="col-span-2 col-start-3 lg:row-start-3 row-start-2">Developer</Title>
             <div className="bttn lg:col-start-3 col-start-1 col-span-2 lg:self-end self-start lg:mx-auto lg:w-1/2 lg:row-start-2 md:row-start-5 row-start-6 ">

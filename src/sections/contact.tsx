@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { contacts, type Contact } from "@/lib/constants";
 import {
-  Card,
-  CardContent,
-  CardFooter,
+    Card,
+    CardContent,
+    CardFooter,
 } from "@/components/ui/card"
 import {
   Field,
@@ -16,10 +16,10 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    InputGroupTextarea,
 } from "@/components/ui/input-group"
 import { Send } from 'lucide-react'
 import { Controller, useForm } from "react-hook-form";
@@ -32,8 +32,9 @@ import { Spinner } from "@/components/ui/spinner";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {SplitText} from "gsap/SplitText";
 import { useRef } from "react";
-gsap.registerPlugin(useGSAP,ScrollTrigger)
+gsap.registerPlugin(useGSAP,ScrollTrigger,SplitText)
 export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}) {
     const container = useRef(null)
     const {theme} = useTheme()
@@ -52,6 +53,21 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     useGSAP(()=>{
       if(!renderPage || !isSoomtherReady) return
       gsap.delayedCall(.1, () => {
+        const title = SplitText.create('.title',{
+            type:"words",
+        })
+        gsap.from(title.words,{
+            x:-50,
+            opacity:0,
+            stagger: .2,
+            ease:'elastic',
+            scrollTrigger: {
+                trigger: '.title',
+                start: "+10px bottom",
+                end: "+=200px",
+                scrub:true,
+            }
+        })
         gsap.from('.contactInfo',{
             xPercent:-100,
             opacity:0,
@@ -100,9 +116,9 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
         })
     }
     return (
-        <section id="contact" ref={container} className="min-h-[calc(100vh-4rem)] w-full flex flex-col items-center gap-5 max-lg:gap-5 lg:p-5 p-3 ">
+        <section id="contact" ref={container} className="min-h-screen w-full flex flex-col items-center gap-20 max-lg:gap-5 lg:p-5 p-3 ">
             <div className="flex flex-col items-center justify-center gap-2 w-3/4">
-                <h2 className="lg:text-6xl text-4xl font-semibold">Get in touch</h2>
+                <h2 className="lg:text-6xl text-4xl font-semibold title">Get in touch</h2>
                 <p className="lg:text-lg text-sm text-muted-foreground text-center">Have a project in mind? Let's work together to bring your ideas to life.</p>
             </div>
             <div className="flex-1  w-full flex max-lg:flex-col items-start lg:justify-between gap-10">
