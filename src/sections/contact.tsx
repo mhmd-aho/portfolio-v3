@@ -218,7 +218,7 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
                                 </>
                                 :
                                 <>
-                                    Send Message <Send className="group-active:-translate-y-3 group-active:translate-x-2 transition-all duration-300"/>
+                                    Send Message <Send className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300"/>
                                 </>
                             }
                         </Button>

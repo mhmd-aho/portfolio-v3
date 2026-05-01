@@ -1,6 +1,7 @@
 import { Github, Linkedin, Instagram, Phone, Mail,MapPinned,type LucideIcon } from 'lucide-react'
 import ecommerce from '@/assets/e-commerce-2-desktop.png'
 import notes from '@/assets/notes-app-desktop.png'
+import finflow from '@/assets/finflow.png'
 import XBlack from '@/assets/X-black.png' 
 import XWhite from '@/assets/X-white.png' 
 import upworkBlack from '@/assets/upwork-black.svg'
@@ -99,5 +100,13 @@ export const projects:Project[] = [
         link:'https://notes-app-dun-eight.vercel.app/',
         repo:'https://github.com/mhmd-aho/notes_app'
     },
+    {
+        name:'Finflow',
+        description:'A personal finance tracker built with Next.js 16 and Tailwind CSS, featuring intuitive data visualizations to help users monitor income, expenses, and overall financial health.',
+        image:finflow,
+        tools:['Next.js','TypeScript','Tailwind','shadcn','Django'],
+        link:'https://finflow-mhmd-a-gamma.vercel.app/',
+        repo:'https://github.com/mhmd-aho/pft-frontend'
+    }
 
 ]
