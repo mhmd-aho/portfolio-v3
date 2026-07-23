@@ -23,7 +23,7 @@ export default function DotBackground(): React.JSX.Element {
 
     let dots: Dot[] = [];
     let animationFrameId: number;
-    const spacing = 24; // Grid density
+    const spacing = 20;
 
     const mouse = { x: -1000, y: -1000 };
 
@@ -50,7 +50,7 @@ export default function DotBackground(): React.JSX.Element {
             baseX: startX,
             baseY: startY,
             currentRadius: 0,
-            currentOpacity: 0, // Starts completely hidden
+            currentOpacity: 0,
             row: r,
             col: c,
           });
@@ -69,11 +69,10 @@ export default function DotBackground(): React.JSX.Element {
       mouse.y = -1000;
     };
 
-    // Render & Physics Animation Loop
     const render = (): void => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      const maxDistance = 200; // The size of your light trail bubble
+      const maxDistance = 300;
 
       dots.forEach((dot) => {
         const dx = mouse.x - dot.baseX;
@@ -84,30 +83,26 @@ export default function DotBackground(): React.JSX.Element {
         let targetOpacity = 0;
         let isHovered = false;
 
-        // Only calculate size and opacity if the mouse is close
         if (distance < maxDistance) {
           isHovered = true;
           const factor = 1 - distance / maxDistance;
-          const powerFactor = Math.pow(factor, 2); // Makes the center dot pop sharpest
+          const powerFactor = Math.pow(factor, 2);
 
-          targetRadius = 1 + powerFactor * 5.5; // Scale up from 1px to 6.5px
-          targetOpacity = powerFactor * 0.85;   // Brightest right under cursor
+          targetRadius = 1 + powerFactor * 5.5;
+          targetOpacity = powerFactor * 0.85;
         }
 
-        // LERP for smooth fading trail physics
-        // Lower numbers like 0.05 make the trail linger longer on screen
         const easeSpeed = isHovered ? 0.25 : 0.05; 
         
         dot.currentRadius += (targetRadius - dot.currentRadius) * easeSpeed;
         dot.currentOpacity += (targetOpacity - dot.currentOpacity) * easeSpeed;
 
-        // Only draw the dot if it has visible opacity to maximize performance
         if (dot.currentOpacity > 0.01) {
           ctx.save();
           ctx.globalAlpha = dot.currentOpacity;
           ctx.beginPath();
           ctx.arc(dot.baseX, dot.baseY, dot.currentRadius, 0, Math.PI * 2);
-          ctx.fillStyle = '#52b788'; // Your portfolio accent green
+          ctx.fillStyle = '#52b788';
           ctx.fill();
           ctx.restore();
         }

@@ -71,7 +71,6 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
         gsap.from('.contactInfo',{
             xPercent:-100,
             opacity:0,
-            ease:'none',
             scrollTrigger:{
                 trigger:'.contactInfo',
                 start:'+40px bottom',
@@ -82,7 +81,6 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
          gsap.from('.contactForm',{
             xPercent:100,
             opacity:0,
-            ease:'none',
             scrollTrigger:{
                 trigger:'.contactForm',
                 start:'+40px bottom',
