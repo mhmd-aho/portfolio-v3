@@ -18,7 +18,6 @@ export type Contact = {
 }
 export type Project = {
     name: string;
-    description: string;
     image: string;
     link: string;
     repo: string;
@@ -86,7 +85,6 @@ export const backEnd = ['Python','Django','Convex']
 export const projects:Project[] = [
     {
         name:'E-commerce',
-        description:'A high-performance, real-time e-commerce features a seamless shopping experience for browsing, filtering, and purchasing footwear.',
         image:ecommerce,
         tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
         link:'https://e-commerce-2-ruby.vercel.app/',
@@ -94,7 +92,6 @@ export const projects:Project[] = [
     },
     {
         name:'Collaborative Notes App',
-        description:'A real-time collaborative note-taking platform that allows multiple users to create, edit, and create a team.',
         image:notes,
         tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
         link:'https://notes-app-dun-eight.vercel.app/',
@@ -102,7 +99,6 @@ export const projects:Project[] = [
     },
     {
         name:'Finflow',
-        description:'A personal finance tracker built with Next.js 16 and Tailwind CSS, featuring intuitive data visualizations to help users monitor income, expenses, and overall financial health.',
         image:finflow,
         tools:['Next.js','TypeScript','Tailwind','shadcn','Django'],
         link:'https://finflow-mhmd-a-gamma.vercel.app/',

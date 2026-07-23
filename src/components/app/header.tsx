@@ -24,7 +24,7 @@ export function Header() {
             <div className="lg:w-1/4 w-fit flex items-center gap-3 justify-end">
                 <ModeToggle />
                 <DropdownMenu>
-                    <DropdownMenuTrigger className="lg:hidden">
+                    <DropdownMenuTrigger asChild className="lg:hidden">
                         <Button variant='outline' size='icon' >
                             <Menu className="h-[1.2rem] w-[1.2rem]" />
                         </Button>
