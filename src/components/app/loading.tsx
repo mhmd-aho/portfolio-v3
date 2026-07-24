@@ -54,8 +54,8 @@ export function Loading({setRenderPage}: {setRenderPage: (value: boolean) => voi
         
     }, {scope: container})
     return (
-        <div className='h-screen w-full fixed inset-0 grid grid-cols-2 grid-rows-3 z-50 font-default overflow-hidden' ref={container}>
-            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-background lg:text-4xl md:text-2xl text-xl font-bold w-full text-center scrambleText font-default">WELCOME TO MOHAMAD ABO HAMOUD PORTFOLIO</h1>
+        <div className='h-screen w-full fixed inset-0 grid grid-cols-2 grid-rows-3 z-50 overflow-hidden' ref={container}>
+            <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-background lg:text-4xl md:text-2xl text-xl font-bold w-full text-center scrambleText font-space-grotesk">WELCOME TO MOHAMAD ABO HAMOUD PORTFOLIO</h1>
             <div className="bg-foreground col-start-1 row-start-1 left"/>
             <div className="bg-foreground col-start-1 row-start-2 left"/>
             <div className="bg-foreground col-start-1 row-start-3 left"/>

@@ -22,9 +22,8 @@ export function Hero({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomth
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-    const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{
-            const useLightIcon = theme === 'dark'|| theme === 'system' && isSystemDark
+            const useLightIcon = theme === 'dark'
             if(typeof contact.icon === 'string' ){
                 return <img src={useLightIcon ? contact.icon : contact.iconLight} alt={contact.name} className="size-5"/>
             }else{

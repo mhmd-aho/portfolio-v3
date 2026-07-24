@@ -26,6 +26,7 @@ function App() {
   useGSAP(() => {
     if(!renderPage) return
     ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
       content: '#smooth-content',
       smooth: 1.5,
       effects: true,
@@ -34,12 +35,12 @@ function App() {
     setIsSoomtherReady(true)
   }, [renderPage])
   return (
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       {!renderPage && <Loading setRenderPage={setRenderPage}/>}
         <>
           <Header/>
           <div id='smooth-wrapper' >
-              <main id='smooth-content' className='h-fit'>
+              <main id='smooth-content' className='h-fit font-inter'>
                 <Hero renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <About renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <Projects renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>

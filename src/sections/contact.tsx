@@ -41,9 +41,8 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     const [isPending,startTransition] = useTransition()
     const genContact = contacts.filter((contact) => !contact.media)
     const mediaContact = contacts.filter((contact) => contact.media)
-    const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches
     const handleIcon =(contact:Contact)=>{
-        const useLightIcon = theme === 'dark'|| theme === 'system' && isSystemDark
+        const useLightIcon = theme === 'dark'
         if(typeof contact.icon === 'string' ){
             return <img src={useLightIcon ? contact.iconLight : contact.icon} alt={contact.name} className="size-5"/>
         }else{
@@ -116,7 +115,7 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     return (
         <section id="contact" ref={container} className="min-h-screen w-full flex flex-col items-center gap-20 max-lg:gap-5 lg:p-5 p-3 ">
             <div className="flex flex-col items-center justify-center gap-2 w-3/4">
-                <h2 className="lg:text-6xl text-4xl font-semibold title">Get in touch</h2>
+                <h2 className="lg:text-6xl text-4xl font-semibold font-space-grotesk title">Get in touch</h2>
                 <p className="lg:text-lg text-sm text-muted-foreground text-center">Have a project in mind? Let's work together to bring your ideas to life.</p>
             </div>
             <div className="flex-1  w-full flex max-lg:flex-col items-start lg:justify-between gap-10">

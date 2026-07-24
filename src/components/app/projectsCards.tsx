@@ -119,11 +119,11 @@ export function ProjectCard({
         <div className="absolute inset-0 max-lg:bg-black/40 max-lg:backdrop-blur-xs lg:hidden" />
       </div>
 
-      <h1 className="text z-20 lg:text-5xl text-2xl cursor-default">
+      <h1 className="text z-20 lg:text-5xl text-2xl cursor- font-space-grotesk">
         {project.name}
       </h1>
 
-      <p className="tools z-20 text-xs lg:text-sm text-muted-foreground font-mono max-lg:text-center max-lg:px-4 max-lg:opacity-0">
+      <p className="tools z-20 text-xs lg:text-sm text-muted-foreground max-lg:text-center max-lg:px-4 max-lg:opacity-0">
         {project.tools.join(" / ")}
       </p>
 

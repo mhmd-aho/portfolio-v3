@@ -6,7 +6,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { Button } from "../ui/button";
 export function Header() {
     const {contextSafe} = useGSAP()
-    const handleNavClick = contextSafe((e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    const handleNavClick = contextSafe((e: React.MouseEvent<HTMLElement>, target: string) => {
         e.preventDefault()
         const smootherCurrent = ScrollSmoother.get()
         if(smootherCurrent){
@@ -15,7 +15,7 @@ export function Header() {
     })
     return (
         <header className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-2 lg:px-5 h-14 bg-background/60 backdrop-blur-lg">
-            <h1 onClick={(e)=>handleNavClick(e,'#hero')} className="lg:text-xl text-lg xl:text-2xl xl:w-1/3 font-bold cursor-pointer">Mohamad Abou Hamoud</h1>
+            <h1 onClick={(e)=>handleNavClick(e,'#hero')} className="lg:text-xl text-lg xl:text-2xl xl:w-1/3 font-space-grotesk font-bold cursor-pointer">Mohamad Abou Hamoud</h1>
             <nav className="hidden lg:flex items-center gap-5">
                 <a className="cursor-pointer" onClick={(e) => handleNavClick(e, '#about')} >About</a>
                 <a className="cursor-pointer" onClick={(e) => handleNavClick(e, '#projects')} >Projects</a>

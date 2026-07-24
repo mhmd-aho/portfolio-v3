@@ -84,11 +84,11 @@ export const tools =['Figma','GitHub','Git','Antigravity','Vite','Postman','Verc
 export const backEnd = ['Python','Django','Convex']
 export const projects:Project[] = [
     {
-        name:'E-commerce',
+        name:'Aura - E-commerce',
         image:ecommerce,
-        tools:['Next.js','TypeScript','Tailwind','shadcn','Convex','better-auth'],
-        link:'https://e-commerce-2-ruby.vercel.app/',
-        repo:'https://github.com/mhmd-aho/e-commerce-2'
+        tools:['Next.js','TypeScript','Tailwind','Django'],
+        link:'https://aura-frontend-bay.vercel.app/',
+        repo:'https://github.com/mhmd-aho/pft-frontend'
     },
     {
         name:'Collaborative Notes App',

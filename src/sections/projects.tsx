@@ -25,7 +25,7 @@ export function Projects({renderPage,isSoomtherReady}: {renderPage: boolean,isSo
     }, {scope: container,dependencies: [renderPage,isSoomtherReady]})
     return (
         <section id="projects" ref={container} className="min-h-screen w-full flex flex-col max-lg:gap-5 lg:px-5 px-0 pt-5">
-            <h2 className="lg:text-6xl text-4xl font-semibold max-lg:px-3 overflow-hidden lg:h-20 h-14 title">Projects</h2>
+            <h2 className="lg:text-6xl text-4xl font-semibold font-space-grotesk max-lg:px-3 overflow-hidden lg:h-20 h-14 title">Projects</h2>
             <div className="flex flex-col">
                 {projects.map((project) => (
                     <ProjectCard key={project.name} project={project} renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
