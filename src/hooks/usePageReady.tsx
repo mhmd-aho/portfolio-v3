@@ -1,18 +1,24 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+
 export function usePageReady() {
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
-        if(document.readyState === 'complete'){
-            setIsLoaded(true);
-            return;
+        const checkReady = () => {
+            if ('fonts' in document) {
+                document.fonts.ready.then(() => setIsLoaded(true));
+            } else {
+                setIsLoaded(true);
+            }
+        };
+
+        if (document.readyState === 'complete') {
+            checkReady();
+        } else {
+            window.addEventListener('load', checkReady);
+            return () => window.removeEventListener('load', checkReady);
         }
-        const handleLoad = () => {
-            setIsLoaded(true);
-        }
-        window.addEventListener('load', handleLoad)
-        return () => {
-            window.removeEventListener('load', handleLoad)
-        }
-    }, [])
-    return isLoaded
+    }, []);
+
+    return isLoaded;
 }

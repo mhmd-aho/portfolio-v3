@@ -51,42 +51,40 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     }
     useGSAP(()=>{
       if(!renderPage || !isSoomtherReady) return
-      gsap.delayedCall(.1, () => {
-        const title = SplitText.create('.title',{
-            type:"words",
-        })
-        gsap.from(title.words,{
-            x:-50,
-            opacity:0,
-            stagger: .2,
-            ease:'elastic',
-            scrollTrigger: {
-                trigger: '.title',
-                start: "+10px bottom",
-                end: "+=200px",
-                scrub:true,
-            }
-        })
-        gsap.from('.contactInfo',{
-            xPercent:-100,
-            opacity:0,
-            scrollTrigger:{
-                trigger:'.contactInfo',
-                start:'+40px bottom',
-                end:'+=200px',
-                scrub:true,
-            }
-        })
-         gsap.from('.contactForm',{
-            xPercent:100,
-            opacity:0,
-            scrollTrigger:{
-                trigger:'.contactForm',
-                start:'+40px bottom',
-                end:'+=200px',
-                scrub:true,
-            }
-        })
+      const titleSplit = new SplitText('.title',{
+          type: "lines",
+          mask: 'lines'
+      })
+      gsap.from(titleSplit.lines,{
+          y: 200,
+          stagger: .2,
+          ease: 'none',
+          scrollTrigger: {
+              trigger: '.title',
+              start: "-40px bottom",
+              end: "+=200px",
+              scrub: true,
+          }
+      })
+      gsap.from('.contactInfo',{
+          xPercent:-100,
+          opacity:0,
+          scrollTrigger:{
+              trigger:'.contactInfo',
+              start:'+40px bottom',
+              end:'+=200px',
+              scrub:true,
+          }
+      })
+       gsap.from('.contactForm',{
+          xPercent:100,
+          opacity:0,
+          scrollTrigger:{
+              trigger:'.contactForm',
+              start:'+40px bottom',
+              end:'+=200px',
+              scrub:true,
+          }
       })
     },{scope:container,dependencies:[renderPage,isSoomtherReady]})
     const form = useForm({
@@ -99,17 +97,22 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     })
     const onSubmit = (data: z.infer<typeof contactSchema>) => {
         startTransition(async () => {
-            await emailjs.send(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                {
-                    name: data.name,
-                    email: data.email,
-                    message: data.message,
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-            )
-            form.reset()
+                body: JSON.stringify({
+                    "access_key": import.meta.env.VITE_WEB3FORMS_API_KEY,
+                    ...data,
+                }),
+            })
+            const result = await res.json()
+            if (result.success) {
+                form.reset()
+            }else{
+                console.error(result.message)
+            }
         })
     }
     return (

@@ -40,7 +40,7 @@ function App() {
         <>
           <Header/>
           <div id='smooth-wrapper' >
-              <main id='smooth-content' className='h-fit font-inter'>
+              <main id='smooth-content' className='h-fit font-inter text-balance'>
                 <Hero renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <About renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>
                 <Projects renderPage={renderPage} isSoomtherReady={isSoomtherReady}/>

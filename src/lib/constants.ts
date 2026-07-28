@@ -84,7 +84,7 @@ export const tools =['Figma','GitHub','Git','Antigravity','Vite','Postman','Verc
 export const backEnd = ['Python','Django','Convex']
 export const projects:Project[] = [
     {
-        name:'Aura - E-commerce',
+        name:'Aura E-commerce',
         image:ecommerce,
         tools:['Next.js','TypeScript','Tailwind','Django'],
         link:'https://aura-frontend-bay.vercel.app/',

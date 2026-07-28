@@ -9,17 +9,20 @@ gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger)
 export function Projects({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomtherReady: boolean}){
     const container = useRef(null)
     useGSAP(()=>{
-        const titleSplit = SplitText.create(".title", {
-            type: "chars",
+        if(!renderPage || !isSoomtherReady) return
+        const titleSplit = new SplitText(".title", {
+            type: "lines",
+            mask: 'lines'
         })
-        gsap.from(titleSplit.chars, {
-            yPercent:-100,
+        gsap.from(titleSplit.lines, {
+            y:200,
             stagger: .2,
-            ease:'bounce',
+            ease:'none',
             scrollTrigger: {
                 trigger: '.title',
                 start: "-40px bottom",
                 end: "+=200px",
+                scrub: true,
             }
         })
     }, {scope: container,dependencies: [renderPage,isSoomtherReady]})

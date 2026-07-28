@@ -4,7 +4,7 @@
 @import "shadcn/tailwind.css";
 @custom-variant dark (&:is(.dark *));
 @theme inline {
-    --font-sans: 'Inter', sans-serif;
+    --font-default: 'ui-serif', 'ui-sans-serif', system-ui, sans-serif;
     --font-space-grotesk: 'Space Grotesk', sans-serif;
     --font-inter: 'Inter', sans-serif;
     --radius-sm: calc(var(--radius) - 4px);
@@ -119,9 +119,31 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted-foreground) var(--background);
+    text-wrap: pretty;
+  }
   body {
     @apply bg-background text-foreground font-inter;
-    }
-}
+  }
 
+  /* WebKit Custom Scrollbar (Chrome, Edge, Safari) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--muted-foreground);
+    border-radius: 9999px;
+    border: 2px solid var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+  }
+}
