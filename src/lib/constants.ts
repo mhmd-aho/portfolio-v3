@@ -2,8 +2,8 @@ import { Github, Linkedin, Instagram, Phone, Mail,MapPinned,type LucideIcon } fr
 import ecommerce from '@/assets/e-commerce-2-desktop.png'
 import notes from '@/assets/notes-app-desktop.png'
 import finflow from '@/assets/finflow.png'
-import XBlack from '@/assets/X-black.png' 
-import XWhite from '@/assets/X-white.png' 
+import XBlack from '@/assets/x-black.png' 
+import XWhite from '@/assets/x-white.png' 
 import upworkBlack from '@/assets/upwork-black.svg'
 import upworkWhite from '@/assets/upwork-white.svg'
 
