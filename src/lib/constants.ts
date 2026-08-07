@@ -55,7 +55,7 @@ export const contacts: Contact[] =[
         name:'X',
         icon: XWhite,
         iconLight: XBlack,
-        link:'https://www.instagram.com/m_abouhamoud/',
+        link:'https://x.com/m_abouhamoud',
         media: true
     },
     {

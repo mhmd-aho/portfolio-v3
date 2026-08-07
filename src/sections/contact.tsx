@@ -25,9 +25,8 @@ import { Send } from 'lucide-react'
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema } from "@/lib/schema";
-import type z from "zod";
-import emailjs from '@emailjs/browser';
-import { useTransition } from 'react';
+import type { z } from "zod";
+import { useState, useTransition } from 'react';
 import { Spinner } from "@/components/ui/spinner";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -39,12 +38,13 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
     const container = useRef(null)
     const {theme} = useTheme()
     const [isPending,startTransition] = useTransition()
+    const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
     const genContact = contacts.filter((contact) => !contact.media)
     const mediaContact = contacts.filter((contact) => contact.media)
     const handleIcon =(contact:Contact)=>{
         const useLightIcon = theme === 'dark'
         if(typeof contact.icon === 'string' ){
-            return <img src={useLightIcon ? contact.iconLight : contact.icon} alt={contact.name} className="size-5"/>
+            return <img src={useLightIcon ? contact.icon : contact.iconLight} alt={contact.name} className="size-5"/>
         }else{
             return <contact.icon className="size-5"/>
         }
@@ -96,22 +96,28 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
         },
     })
     const onSubmit = (data: z.infer<typeof contactSchema>) => {
+        setStatus(null)
         startTransition(async () => {
-            const res = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    "access_key": import.meta.env.VITE_WEB3FORMS_API_KEY,
-                    ...data,
-                }),
-            })
-            const result = await res.json()
-            if (result.success) {
-                form.reset()
-            }else{
-                console.error(result.message)
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "access_key": import.meta.env.VITE_WEB3FORMS_API_KEY,
+                        ...data,
+                    }),
+                })
+                const result = await res.json()
+                if (result.success) {
+                    setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' })
+                    form.reset()
+                } else {
+                    setStatus({ type: 'error', message: result.message || 'Failed to send message. Please try again.' })
+                }
+            } catch {
+                setStatus({ type: 'error', message: 'An error occurred while sending. Please try again later.' })
             }
         })
     }
@@ -209,7 +215,12 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
                             </FieldGroup>
                         </form>
                     </CardContent>
-                    <CardFooter >
+                    <CardFooter className="flex-col gap-3">
+                        {status && (
+                            <div className={`w-full p-3 text-sm rounded-md font-medium text-center ${status.type === 'success' ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30' : 'bg-destructive/15 text-destructive border border-destructive/30'}`}>
+                                {status.message}
+                            </div>
+                        )}
                         <Button form="contact-form" type="submit" disabled={isPending} size='lg' className="w-full group">
                             {
                                 isPending?
