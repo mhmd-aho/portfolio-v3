@@ -69,12 +69,10 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
     }, {scope: container,dependencies: [renderPage,isSoomtherReady]})
     return (
         <section ref={container} id="about" className="min-h-screen w-full flex flex-col gap-8 lg:gap-12 lg:px-5 px-3 pt-5 pb-12">
-            <div className="flex max-lg:flex-col lg:items-center lg:justify-between gap-4">
-                <h2 className="title lg:text-6xl text-4xl font-semibold font-space-grotesk lg:h-20 h-14 overflow-hidden">About me</h2>
-                <p className="lg:text-2xl text-lg para">Hey i’m Mohamad a <span className="font-semibold">full-stack developer</span><br/> from lebanon</p>
-            </div>
-            <div className="flex-1 flex max-lg:flex-col items-center justify-between gap-8 lg:gap-12">
-                <div className="flex flex-col justify-center gap-4 lg:w-5/12 w-full">
+            <h2 className="title lg:text-6xl text-4xl font-semibold font-space-grotesk lg:h-20 h-14 overflow-hidden">About me</h2>
+            <div className="flex-1 flex flex-col items-center sm:justify-between gap-5 lg:gap-12">
+                <p className="lg:text-6xl text-3xl para text-center">Hey i’m Mohamad a full-stack developer from lebanon</p>
+                <div className="flex flex-col justify-center self-start gap-4 lg:w-3/4 w-full">
                     <Item variant='outline' className="w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl font-space-grotesk">Front-end</ItemTitle>
@@ -97,7 +95,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                             </div>
                         </ItemContent>
                     </Item>
-                    <Item variant='outline' className="w-full skill">
+                    <Item variant='muted' className="sm:w-3/4 w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl font-space-grotesk">Back-end</ItemTitle>
                         </ItemHeader>
@@ -119,7 +117,7 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                             </div>
                         </ItemContent>
                     </Item>
-                    <Item variant='muted' className="w-full skill">
+                    <Item variant='outline' className="w-full skill">
                         <ItemHeader>
                             <ItemTitle className="text-xl font-space-grotesk">Tools</ItemTitle>
                         </ItemHeader>
@@ -141,9 +139,6 @@ export function About({renderPage,isSoomtherReady}: {renderPage: boolean,isSoomt
                             </div>
                         </ItemContent>
                     </Item>
-                </div>
-                <div className="lg:w-7/12 w-full flex items-center justify-center">
-                    <GithubSection/>
                 </div>
             </div>
         </section>
