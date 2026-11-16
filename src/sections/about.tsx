@@ -1,6 +1,5 @@
 import { Item, ItemContent, ItemHeader, ItemTitle } from "@/components/ui/item";
 import { backEnd, frontEnd, tools } from "@/lib/constants";
-import GithubSection from "@/components/app/githubSection";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";

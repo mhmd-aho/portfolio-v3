@@ -201,9 +201,14 @@ export function Contact({renderPage,isSoomtherReady}: {renderPage: boolean,isSoo
                                     <FieldLabel>Message</FieldLabel>
                                     <InputGroup>
                                         <InputGroupTextarea placeholder="Tell me about your project, goals, and timeline..." {...field}/>
-                                        <InputGroupAddon align="block-end">
+                                        <InputGroupAddon align="block-end" className="justify-between">
+                                            <InputGroupText className={field.value.length < 30 ? "text-muted-foreground" : "text-green-600"}>
+                                                {field.value.length < 30 
+                                                ? `Min. 30 characters (${30 - field.value.length} more)` 
+                                                : "Minimum reached"}
+                                            </InputGroupText>
                                             <InputGroupText className="tabular-nums">
-                                                {field.value.length}/2000 characters
+                                                {field.value.length}/2000
                                             </InputGroupText>
                                         </InputGroupAddon>
                                     </InputGroup>
